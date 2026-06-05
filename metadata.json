@@ -1,0 +1,6 @@
+{
+  "name": "IDLEB X – AI Cosmos",
+  "description": "Interactive AI Cosmos platform with custom RAG, 3D-inspired animations, and voice synthesis",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
