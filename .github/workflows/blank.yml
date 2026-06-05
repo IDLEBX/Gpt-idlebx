@@ -1,9 +1,9 @@
-name: Build Android APK
+name: Build Real Android APK
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
-  workflow_dispatch:
 
 jobs:
   build:
@@ -13,14 +13,20 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Create a simple APK file
-      run: |
-        mkdir -p app/build/outputs/apk/release
-        echo "IDLEB X App" > app/build/outputs/apk/release/app.apk
-        echo "APK created successfully"
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+        
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Build APK
+      run: ./gradlew assembleRelease
       
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: IDLEB-X-App
-        path: app/build/outputs/apk/release/app.apk
+        name: IDLEB-X-Real-App
+        path: app/build/outputs/apk/release/*.apk
