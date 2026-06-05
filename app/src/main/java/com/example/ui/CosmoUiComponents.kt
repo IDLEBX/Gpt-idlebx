@@ -571,10 +571,10 @@ fun CustomCosmoCharts(
                 val centerY = height / 2f
                 val maxRadius = min(width, height) * 0.40f
 
-                val numAxes = 5
+                val numAxes = 7
                 val angles = List(numAxes) { i -> (i * 2 * PI / numAxes) - (PI / 2) }
-                val axisLabels = listOf("Gemini", "GPT-4o", "Llama 3", "DeepSeek", "Nano Banana")
-                val scalarValues = listOf(0.92f, 0.94f, 0.85f, 0.89f, 0.60f)
+                val axisLabels = listOf("Gemini", "GPT-4o", "DeepSeek", "Llama 3", "Claude", "Perplexity", "Nano Banana")
+                val scalarValues = listOf(0.92f, 0.94f, 0.89f, 0.85f, 0.91f, 0.93f, 0.60f)
 
                 // 1. Draw web concentric pentagons
                 listOf(0.25f, 0.5f, 0.75f, 1.0f).forEach { scalar ->
@@ -749,12 +749,14 @@ fun ModelRotatingSelector(
     activeModels: Set<String>,
     onToggleModel: (String) -> Unit
 ) {
-    val modelsList = listOf("Gemini", "GPT-4o", "DeepSeek", "Llama 3", "Nano Banana")
+    val modelsList = listOf("Gemini", "GPT-4o", "DeepSeek", "Llama 3", "Claude", "Perplexity", "Nano Banana")
     val colorsMap = mapOf(
         "Gemini" to Color(0xFF00F2FE),
         "GPT-4o" to Color(0xFF9D4EDD),
         "DeepSeek" to Color(0xFF39FF14),
         "Llama 3" to Color(0xFFFF8C00),
+        "Claude" to Color(0xFFFF5722),
+        "Perplexity" to Color(0xFF00FFCC),
         "Nano Banana" to Color(0xFFFFFF00)
     )
 
@@ -808,6 +810,8 @@ fun ModelRotatingSelector(
                             "GPT-4o" -> Icon(Icons.Default.Language, contentDescription = null, tint = modelColor, modifier = Modifier.size(18.dp))
                             "DeepSeek" -> Icon(Icons.Default.Search, contentDescription = null, tint = modelColor, modifier = Modifier.size(18.dp))
                             "Llama 3" -> Icon(Icons.Default.Psychology, contentDescription = null, tint = modelColor, modifier = Modifier.size(18.dp))
+                            "Claude" -> Icon(Icons.Default.Cloud, contentDescription = null, tint = modelColor, modifier = Modifier.size(18.dp))
+                            "Perplexity" -> Icon(Icons.Default.Explore, contentDescription = null, tint = modelColor, modifier = Modifier.size(18.dp))
                             "Nano Banana" -> Icon(Icons.Default.ElectricBolt, contentDescription = null, tint = modelColor, modifier = Modifier.size(18.dp))
                         }
                     }

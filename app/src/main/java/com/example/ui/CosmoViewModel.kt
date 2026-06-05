@@ -210,7 +210,7 @@ class CosmoViewModel(application: Application) : AndroidViewModel(application), 
 
                     // Inject custom mini JSON chart metrics if user asks about ratings, status or statistics
                     val chartJson = if (prompt.contains("نسبة") || prompt.contains("مخطط") || prompt.contains("شكل") || prompt.contains("chart") || prompt.contains("ratio") || prompt.contains("score") || prompt.contains("compare")) {
-                        """{"metrics": [{"label": "Gemini", "value": 92}, {"label": "GPT-4o", "value": 94}, {"label": "Llama 3", "value": 85}, {"label": "DeepSeek", "value": 89}, {"label": "Banana", "value": 60}]}"""
+                        """{"metrics": [{"label": "Gemini", "value": 92}, {"label": "GPT-4o", "value": 94}, {"label": "DeepSeek", "value": 89}, {"label": "Llama 3", "value": 85}, {"label": "Claude", "value": 91}, {"label": "Perplexity", "value": 93}, {"label": "Banana", "value": 60}]}"""
                     } else {
                         // Regular metric representation
                         """{"metrics": [{"label": "RAG Accuracy", "value": 95}, {"label": "Speed", "value": 85}, {"label": "Resonance", "value": 78}]}"""
