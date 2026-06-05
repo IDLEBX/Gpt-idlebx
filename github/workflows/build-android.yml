@@ -1,0 +1,49 @@
+name: Build IDLEB X Android App
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:  # زر يدوي للتشغيل
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: استنساخ المستودع
+        uses: actions/checkout@v4
+
+      - name: تثبيت Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: تثبيت Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: إعداد Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: تثبيت الحزم وبناء المشروع
+        run: |
+          npm install
+          npm run build
+
+      - name: تثبيت Capacitor
+        run: |
+          npm install @capacitor/core @capacitor/cli @capacitor/android
+          npx cap init "IDLEB X" "com.idlebx.ai.cosmos" --web-dir=dist
+          npx cap add android
+
+      - name: بناء تطبيق الأندرويد
+        run: |
+          cd android
+          ./gradlew assembleDebug
+
+      - name: رفع ملف APK للتحميل
+        uses: actions/upload-artifact@v4
+        with:
+          name: IDLEB-X-Android-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
