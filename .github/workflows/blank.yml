@@ -2,8 +2,6 @@ name: Build Real Android APK
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ main ]
 
 jobs:
   build:
@@ -22,18 +20,16 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
       
-    - name: Create local.properties
+    - name: Make gradlew executable
       run: |
-        echo "sdk.dir=$ANDROID_HOME" > local.properties
+        chmod +x gradlew
+        ls -la gradlew  # للتأكد من وجوده
         
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-      
-    - name: Build Debug APK (بدون توقيع)
+    - name: Build APK
       run: ./gradlew assembleDebug
       
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: IDLEB-X-App-Debug
+        name: IDLEB-X-App
         path: app/build/outputs/apk/debug/*.apk
